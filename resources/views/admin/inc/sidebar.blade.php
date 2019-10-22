@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-5" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-5" href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -43,11 +43,11 @@
 
     <!-- Suppliers Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brands" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#suppliers" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-luggage-cart"></i>
             <span>Suppliers</span>
         </a>
-        <div id="brands" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="suppliers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Suppliers:</h6>
                 <a class="collapse-item" href="{{ route('supplier') }}">Manage Suppliers</a>
@@ -57,11 +57,11 @@
 
     <!-- Brand Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#supplier" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-luggage-cart"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brand" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-tags"></i>
             <span>Brands</span>
         </a>
-        <div id="supplier" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="brand" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Brands:</h6>
                 <a class="collapse-item" href="{{ route('brand') }}">Manage Brands</a>
@@ -72,7 +72,7 @@
     <!-- Category Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#category" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-luggage-cart"></i>
+            <i class="fas fa-box"></i>
             <span>Category</span>
         </a>
         <div id="category" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -91,12 +91,21 @@
         Payment
     </div>
 
-    <!-- Payments -->
+    <!--Payment-->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('payment') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Payment</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#payment" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Payment</span>
+        </a>
+        <div id="payment" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Payment:</h6>
+                <a class="collapse-item" href="{{ route('payment') }}">Make Payment</a>
+                <a class="collapse-item" href="{{ route('payment-method') }}">Payment Method</a>
+            </div>
+        </div>
     </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

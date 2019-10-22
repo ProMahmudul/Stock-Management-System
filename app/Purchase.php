@@ -15,4 +15,9 @@ class Purchase extends Model
     {
         return $this->belongsTo('App\Supplier');
     }
+
+    public function payment()
+    {
+        return $this->hasMany('App\Payment', 'box_id', 'box_id');
+    }
 }

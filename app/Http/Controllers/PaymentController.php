@@ -26,6 +26,12 @@ class PaymentController extends Controller
         return $payments;
     }
 
+    public function payment_stock_details($id)
+    {
+        $purchase = Purchase::where('box_id', $id)->with(['supplier', 'product', 'product.category', 'product.brand', 'payment'])->get();
+        return $purchase;
+    }
+
     public function save_supplier_payment(Request $request)
     {
         $payment = new Payment();
@@ -53,10 +59,11 @@ class PaymentController extends Controller
         return redirect()->route('payment');
     }
 
-    public function invoice($id){
+    public function invoice($id)
+    {
         $purchase = Purchase::where('box_id', $id)->first();
         $payment = Payment::where('box_id', $id)->sum('amount');
         $invoice = PDF::loadView('invoice.invoice', compact(['purchase', 'payment']));
-        return $invoice->stream('invoice_'.$id.'.pdf');
+        return $invoice->stream('invoice_' . $id . '.pdf');
     }
 }

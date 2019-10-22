@@ -3,8 +3,8 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin') }}/vendor/datatables/dataTables.bootstrap4.min.css">
     <style>
-        .modal-dialog {
-            /*max-width: 997px;*/
+        .payment-info-dialog {
+            max-width: 997px;
         }
     </style>
 @endsection
@@ -45,11 +45,11 @@
             </a>
         </div>
 
-        <!--Stock Modal-->
+        <!--Payment info Modal-->
 
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="add-category"
+        <div class="modal fade" id="payment-info-modal" tabindex="-1" role="dialog" aria-labelledby="payment-info-modal"
              aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog payment-info-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title">
@@ -64,17 +64,16 @@
                     <div class="modal-body">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered product-table" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="payment-details-table" width="100%" cellspacing="0">
                                     <thead>
                                     <tr>
-                                        <th>Product(Qty.)</th>
-                                        <th>Available</th>
+                                        <th>Supplier</th>
+                                        <th>Product</th>
                                         <th>Category</th>
                                         <th>Brand</th>
-                                        <th>Price</th>
-                                        <th>Size</th>
-                                        <th>Color</th>
-                                        <th>Action</th>
+                                        <th>Qty</th>
+                                        <th>U.Price</th>
+                                        <th>Amount</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -210,7 +209,7 @@
                             <td>{{ $purchase->supplier->name }}</td>
                             <td class="d-flex">
                                 <a href="#" class="btn btn-info btn-icon-split btn-sm mr-2" data-toggle="modal"
-                                   data-target="#modal" onclick="getProducts({{ $purchase->box_id }})">
+                                   data-target="#payment-info-modal" onclick="getPaymentInfo({{ $purchase->box_id }})">
                                     <span class="icon">
                                       <i class="fas fa-eye"></i>
                                     </span>
@@ -261,12 +260,31 @@
 
     <script>
 
+        function getPaymentInfo(box_id) {
+            $.get('payment/stock-details/' + box_id)
+                .done(function (data) {
+                    var html = "";
+                    data.forEach(function (purchase) {
+                        html += '<tr>'
+                        html += '<td>'+ purchase.supplier.name + '</td>'
+                        html += '<td>'+ purchase.product.product_name+ '</td>'
+                        html += '<td>'+ purchase.product.category.name+ '</td>'
+                        html += '<td>'+ purchase.product.brand.name+ '</td>'
+                        html += '<td>'+ purchase.product.quantity+ '</td>'
+                        html += '<td>'+ purchase.product.price+ '</td>'
+                        html += '<td>'+ purchase.product.price * purchase.product.quantity+ '</td>'
+                        html += '</tr>'
+                    })
+                    $('#payment-details-table tbody').html(html)
+                })
+        }
+
         function addPayment(box_id, price, supplier_id) {
             $('input[name="invoice_id"]').val(box_id)
             $('input[name="total"]').val(price)
             $('input[name="supplier"]').val(supplier_id)
 
-            $.get('payment/details/' + box_id)
+            $.get('payment/add-details/' + box_id)
                 .done(function (data) {
                     var paid = 0;
                     data.forEach(function (payment) {

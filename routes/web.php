@@ -72,7 +72,21 @@ Route::prefix('category')->group(function () {
 Route::prefix('payment')->group(function () {
     Route::get('/', 'PaymentController@index')->name('payment');
     Route::post('/supplier', 'PaymentController@save_supplier_payment')->name('payment.supplier');
-    Route::get('/details/{id}', 'PaymentController@payment_details')->name('payment.details');
+    Route::get('/add-details/{id}', 'PaymentController@payment_details')->name('payment.details');
+    Route::get('/stock-details/{id}', 'PaymentController@payment_stock_details')->name('payment.stock.details');
+
+});
+
+/**
+ * Payment Method Route
+ */
+Route::prefix('payment-method')->group(function () {
+    Route::get('/', 'PaymentMethodController@index')->name('payment-method');
+    Route::post('/store', 'PaymentMethodController@store')->name('payment-method.store');
+    Route::get('/unpublished/{id}', 'PaymentMethodController@unpublished')->name('payment-method.unpublished');
+    Route::get('/published/{id}', 'PaymentMethodController@published')->name('payment-method.published');
+    Route::post('/update', 'PaymentMethodController@update')->name('payment-method.update');
+    Route::post('/delete', 'PaymentMethodController@delete')->name('payment-method.delete');
 });
 
 /**
