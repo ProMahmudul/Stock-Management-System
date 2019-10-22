@@ -23,6 +23,11 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::prefix('stock')->group(function () {
     Route::get('/add', 'StockController@index')->name('stock.add');
     Route::post('save-purchase', 'StockController@save_purchase')->name('stock.save-purchase');
+    Route::get('/', 'StockController@manage')->name('stock.manage');
+    Route::get('/view/{id}', 'StockController@stock_details')->name('stock.view-details');
+    Route::get('/edit/{id}', 'StockController@edit')->name('stock.edit');
+    Route::post('/update/', 'StockController@update')->name('stock.update');
+    Route::get('/delete/{id}', 'StockController@delete')->name('stock.delete');
 });
 
 /**
@@ -59,4 +64,13 @@ Route::prefix('category')->group(function () {
     Route::get('/published/{id}', 'CategoryController@published')->name('category.published');
     Route::post('/update', 'CategoryController@update')->name('category.update');
     Route::post('/delete', 'CategoryController@delete')->name('category.delete');
+});
+
+/**
+ * Supplier Payment Route
+ */
+Route::prefix('payment')->group(function () {
+    Route::get('/', 'PaymentController@index')->name('payment');
+    Route::post('/supplier', 'PaymentController@save_supplier_payment')->name('payment.supplier');
+    Route::get('/details/{id}', 'PaymentController@payment_details')->name('payment.details');
 });

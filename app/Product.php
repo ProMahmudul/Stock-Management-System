@@ -6,5 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    //
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo('App\Brand');
+    }
+
+    public function purchase()
+    {
+        return $this->hasOne('App\Purchase', 'box_id', 'box_id');
+    }
+
 }
