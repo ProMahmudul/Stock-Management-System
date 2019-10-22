@@ -235,13 +235,11 @@
                                         <span class="text">Pay</span>
                                     </a>
                                 @endif
-                                <form id="delete-form" action="{{ route('category.delete' ) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $purchase->id }}">
-                                    <button class="btn btn-danger btn-sm"
-                                            onclick="if (!confirm('Are you sure to print!')) return false; "><i
-                                                class="fas fa-print"></i></button>
-                                </form>
+                                <a href="{{ route('payment.invoice', $purchase->box_id) }}" class="btn btn-danger btn-icon-split btn-sm mr-2" onclick="if (!confirm('Are you sure to print?')) return false; ">
+                                    <span class="icon">
+                                      <i class="fas fa-print"></i>
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

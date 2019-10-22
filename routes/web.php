@@ -74,3 +74,9 @@ Route::prefix('payment')->group(function () {
     Route::post('/supplier', 'PaymentController@save_supplier_payment')->name('payment.supplier');
     Route::get('/details/{id}', 'PaymentController@payment_details')->name('payment.details');
 });
+
+/**
+ * Invoice PDF Generate
+ */
+
+Route::get('/payment/invoice/{id}', 'PaymentController@invoice')->name('payment.invoice');

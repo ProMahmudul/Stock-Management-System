@@ -6,6 +6,7 @@ use App\Payment;
 use App\PaymentMethod;
 use App\Purchase;
 use App\Supplier;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -50,5 +51,12 @@ class PaymentController extends Controller
         Session::flash('message', 'payment successfully!');
         Session::flash('alert_type', 'alert-success');
         return redirect()->route('payment');
+    }
+
+    public function invoice($id){
+        $purchase = Purchase::where('box_id', $id)->first();
+        $payment = Payment::where('box_id', $id)->sum('amount');
+        $invoice = PDF::loadView('invoice.invoice', compact(['purchase', 'payment']));
+        return $invoice->stream('invoice_'.$id.'.pdf');
     }
 }
