@@ -7,7 +7,7 @@
 
 ## Installation
 
-Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.8/installation)
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/6/installation)
 
 
 Clone the repository or doanload the project from github
