@@ -12,7 +12,7 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository or doanload the project from github
 
-    git clone https://github.com/ProMahmudul/Inventory-Management-System-in-Laravel
+    git clone https://github.com/ProMahmudul/Stock-Management-System.git
 
 Copy that project in htdocs folder and open the folder location in cmd.
 
@@ -48,10 +48,7 @@ You can now access the server at http://localhost:8000
     php artisan serve
     
 ## Admin Login Credentials
-
-email: mahmudul89277@gmail.com 
-
-password: 1234
+------
 
 **you can change it from database as per your need.
 
